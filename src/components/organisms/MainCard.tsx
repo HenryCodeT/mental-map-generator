@@ -1,6 +1,6 @@
-import React from 'react';
-import GenerateForm from '../molecules/GenerateForm';
-import DownloadButton from '../molecules/DownloadButton';
+import React from "react";
+import GenerateForm from "../molecules/GenerateForm";
+import DownloadButton from "../molecules/DownloadButton";
 
 interface MainCardProps {
   text: string;
@@ -10,13 +10,22 @@ interface MainCardProps {
   isMapGenerated: boolean;
 }
 
-const MainCard = ({ text, onTextChange, onGenerate, onDownload, isMapGenerated }: MainCardProps) => {
+const MAX_TEXT_LENGTH = 4000;
+
+const MainCard = ({
+  text,
+  onTextChange,
+  onGenerate,
+  onDownload,
+  isMapGenerated,
+}: MainCardProps) => {
   return (
     <div className="bg-white p-8 rounded-xl shadow-lg flex flex-col space-y-6">
       <GenerateForm
         text={text}
         onTextChange={onTextChange}
         onGenerate={onGenerate}
+        maxLength={MAX_TEXT_LENGTH}
       />
       {isMapGenerated && (
         <div className="flex justify-end">

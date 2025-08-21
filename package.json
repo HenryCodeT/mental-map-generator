@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@langchain/community": "^0.3.53",
+    "@langchain/google-genai": "^0.2.16",
+    "@langchain/openai": "^0.6.9",
+    "@langchain/textsplitters": "^0.1.0",
     "@xyflow/react": "^12.8.3",
     "html-to-image": "^1.11.13",
+    "langchain": "^0.3.31",
     "next": "15.4.7",
     "next-intl": "^4.3.4",
     "react": "19.1.0",
