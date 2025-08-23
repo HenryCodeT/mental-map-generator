@@ -76,6 +76,15 @@ function validateText(text: string): { isValid: boolean; error?: string } {
   return { isValid: true };
 }
 
+function getRandomColor(): string {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+}
+
 export async function POST(req: NextRequest) {
   console.log("POST request received.");
   try {
@@ -212,6 +221,31 @@ Input: {input}
       const actualNodes = output.mindmap?.nodes?.length || 0;
       if (actualNodes < minNodes || actualNodes > maxNodes) {
         console.warn(`Warning: Generated ${actualNodes} nodes, expected ${minNodes}-${maxNodes}`);
+      }
+
+      interface MindmapNode {
+        id: string;
+        data: { label: string };
+        position: { x: number; y: number };
+        style?: { backgroundColor: string; color: string; opacity: number };
+      }
+
+      if (output.mindmap && output.mindmap.nodes) {
+        output.mindmap.nodes = output.mindmap.nodes.map((node: MindmapNode) => {
+          const randomBgColor = getRandomColor();
+
+          const textColor = '#333333';
+
+          return {
+            ...node,
+            style: {
+              backgroundColor: randomBgColor,
+              color: textColor,
+              opacity: 0.4
+            }
+          };
+        });
+        console.log("Colors and opacity added to nodes.");
       }
 
     } catch (err) {

@@ -24,7 +24,15 @@ const MindMapDisplay = forwardRef<HTMLDivElement, MindMapDisplayProps>(
         ref={ref}
       >
         {nodes.length > 0 ? (
-          <ReactFlow nodes={nodes} edges={edges}>
+          <ReactFlow
+            nodes={nodes}
+            edges={edges}
+            defaultEdgeOptions={{
+              type: "straight",
+              style: { strokeWidth: 4 },
+            }}
+            fitView
+          >
             <MiniMap />
             <Controls />
             <Background color="#aaa" gap={16} />
